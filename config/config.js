@@ -29,12 +29,25 @@ var config = {
 			header: "日历",
 			position: "top_left",
 			config: {
+				fetchInterval: 30000,
 				calendars: [
 					{
 						symbol: "calendar-check-o ",
-						url: "https://calendar.google.com/calendar/ical/deanzh16%40gmail.com/private-1500ba3117ff42e02e02530eb5d291da/basic.ics"
+						url: "https://calendar.google.com/calendar/ical/samuelpoopooda%40gmail.com/private-c228f2ccb3782ab8de4ddc3cbc9ee93f/basic.ics"
+					},
+					{
+						symbol: "calendar-check-o ",
+						url: "http://www.calendarlabs.com/templates/ical/US-Holidays.ics"
+					},
+					{
+						symbol: "calendar-check-o ",
+                        url: "https://calendar.google.com/calendar/ical/deanzh16%40gmail.com/private-1500ba3117ff42e02e02530eb5d291da/basic.ics"
+					},
+					{
+						symbol: "calendar-check-o ",
+                        url: "https://calendar.google.com/calendar/ical/summerdeng22%40gmail.com/private-28c035e524ee00c75d5b0303f8bad702/basic.ics"                   
 					}
-				]
+				]				
 			}
 		},
 		// {

@@ -89,6 +89,13 @@ Module.register("calendar", {
 
 		this.calendarData = {};
 		this.loaded = false;
+		this.urlDict = {
+					"zhouding": "https://calendar.google.com/calendar/ical/deanzh16%40gmail.com/private-1500ba3117ff42e02e02530eb5d291da/basic.ics",
+					"wupeilin":  "https://calendar.google.com/calendar/ical/samuelpoopooda%40gmail.com/private-c228f2ccb3782ab8de4ddc3cbc9ee93f/basic.ics",
+					"dengyini": "https://calendar.google.com/calendar/ical/summerdeng22%40gmail.com/private-28c035e524ee00c75d5b0303f8bad702/basic.ics",
+					"usa": "http://www.calendarlabs.com/templates/ical/US-Holidays.ics"
+				};
+		this.url_id = "usa";
 	},
 
 	// Override socket notification handler.
@@ -106,12 +113,17 @@ Module.register("calendar", {
 			Log.error("Calendar Error. Could not fetch calendar: " + payload.url);
 		} else if (notification === "INCORRECT_URL") {
 			Log.error("Calendar Error. Incorrect url: " + payload.url);
+		} else if (notification === "CHANGE_URL") {
+			Log.log("CHANGE_URL RECEIVED---------------------------------------------------------");
+			this.url_id = payload.id;
 		} else {
 			Log.log("Calendar received an unknown socket notification: " + notification);
 		}
 
 		this.updateDom(this.config.animationSpeed);
 	},
+	
+	
 
 	// Override dom generator.
 	getDom: function () {
@@ -317,7 +329,8 @@ Module.register("calendar", {
 	createEventList: function () {
 		var events = [];
 		var today = moment().startOf("day");
-		for (var c in this.calendarData) {
+	//	for (var c in this.calendarData) {
+			var c = this.urlDict[this.url_id];
 			var calendar = this.calendarData[c];
 			for (var e in calendar) {
 				var event = calendar[e];
@@ -331,7 +344,7 @@ Module.register("calendar", {
 				event.today = event.startDate >= today && event.startDate < (today + 24 * 60 * 60 * 1000);
 				events.push(event);
 			}
-		}
+		//}
 
 		events.sort(function (a, b) {
 			return a.startDate - b.startDate;
